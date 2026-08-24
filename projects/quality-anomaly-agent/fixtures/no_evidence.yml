@@ -1,0 +1,33 @@
+schema_version: 1
+project_id: quality-anomaly-agent
+scenario_id: no_evidence
+synthetic: true
+source_label: 公开模拟数据
+clock: "2026-01-15T11:00:00+08:00"
+qms:
+  anomaly:
+    anomaly_id: QA-INCOMING-002
+    symptom: 来料检验结果异常，但提交时未关联物料、批次或检验记录
+    severity: medium
+    discovered_at: "2026-01-15T10:55:00+08:00"
+  inspection_records: []
+erp:
+  material_lot: null
+  prior_lots: []
+plm:
+  specification: null
+mes:
+  usage:
+    used_in_work_orders: []
+    quarantine_status: unknown
+knowledge:
+  fmea: []
+  historical_cases: []
+expected:
+  facts: []
+  hypotheses: []
+  required_clarifications: [material_id, lot_id, inspection_record]
+  forbidden_conclusions:
+    - any_root_cause_without_evidence
+    - automatic_release_or_rejection
+

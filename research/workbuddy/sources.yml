@@ -1,0 +1,55 @@
+schema_version: 1
+product: WorkBuddy
+vendor: Tencent
+official_domains: [workbuddy.ai]
+researched_at: "2026-08-23"
+applicable_version: "WorkBuddy 官方网站与文档，访问于 2026-08-23"
+sources:
+  - id: WORKBUDDY-01
+    title: WorkBuddy official website
+    url: https://www.workbuddy.ai/
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-20 页面版本"
+    source_kind: product_page
+    claim_scope: "深度研究、交付物、连接器与价格页面主张"
+    license_note: "客户证言只视为厂商展示的营销主张；未复制图片或长段原文。"
+  - id: WORKBUDDY-02
+    title: WorkBuddy Overview
+    url: https://www.workbuddy.ai/docs/workbuddy/Overview
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "产品定位、自主计划、本地文件与交付物"
+    license_note: "仅作事实引用。"
+  - id: WORKBUDDY-03
+    title: Create Task
+    url: https://www.workbuddy.ai/docs/workbuddy/Create-Task
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "任务输入、Context、并行任务与输出约束"
+    license_note: "仅作事实引用。"
+  - id: WORKBUDDY-04
+    title: View Results
+    url: https://www.workbuddy.ai/docs/workbuddy/Results
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Artifacts、All Files、Changes 与 Preview"
+    license_note: "仅作事实引用。"
+  - id: WORKBUDDY-05
+    title: Connectors
+    url: https://www.workbuddy.ai/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Connector
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "GitHub、Jira、Drive、Gmail、Notion 与 Slack 连接器"
+    license_note: "仅作事实引用。"
+  - id: WORKBUDDY-06
+    title: Permission Modes
+    url: https://www.workbuddy.ai/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Permission-Modes
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Default Permissions、Full Access 与高风险确认"
+    license_note: "仅作事实引用。"

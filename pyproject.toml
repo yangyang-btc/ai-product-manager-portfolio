@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-product-manager-portfolio-workspace"
+version = "0.1.0"
+description = "AI product manager portfolio with runnable Agent and evaluation projects"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.116,<1",
+  "httpx>=0.28,<1",
+  "langgraph>=0.6,<1",
+  "pydantic>=2.11,<3",
+  "PyYAML>=6.0,<7",
+  "streamlit>=1.49,<2",
+  "uvicorn>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+  "jsonschema>=4.25,<5",
+  "mypy>=1.17,<2",
+  "pytest>=8.4,<9",
+  "ruff>=0.12,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["apps", "packages", "projects", "tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"apps/evaluation_lab/app.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["apps", "packages", "projects", "tools", "tests"]

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "dataset_version": "contract-fixtures-v1",
+  "workflow_version": "contract-workflow-v1",
+  "metric_definition_version": "contract-v1",
+  "source_label": "模拟数据运行结果",
+  "metrics": {
+    "case_count": 4,
+    "critical_risk_recall": 1.0,
+    "general_risk_recall": 1.0,
+    "false_positive_rate": 0.0,
+    "unsupported_finding_rate": 0.0,
+    "citation_accuracy": 1.0,
+    "human_interception_rate": 1.0
+  },
+  "cases": [
+    {"case_id": "procurement_contract_001", "contract_type": "procurement", "finding_count": 2, "status": "awaiting_human"},
+    {"case_id": "sales_contract_001", "contract_type": "sales", "finding_count": 1, "status": "awaiting_human"},
+    {"case_id": "nda_001", "contract_type": "nda", "finding_count": 1, "status": "awaiting_human"},
+    {"case_id": "technical_cooperation_001", "contract_type": "technical_cooperation", "finding_count": 1, "status": "awaiting_human"}
+  ],
+  "release_passed": true,
+  "gate_reasons": []
+}

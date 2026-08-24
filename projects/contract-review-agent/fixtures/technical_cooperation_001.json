@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "technical_cooperation_001",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-301",
+    "contract_type": "technical_cooperation",
+    "version": "V0.7",
+    "party_aliases": ["EQUIPMENT-COMPANY-DEMO", "RESEARCH-PARTNER-D"],
+    "business_context": {
+      "project_alias": "PROJECT-DEMO-301",
+      "deliverable": "process_control_algorithm_and_validation_report"
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-IP-BG-001",
+        "heading": "背景知识产权",
+        "page": 6,
+        "text": "双方在合作前各自拥有的设备结构、算法与工艺知识产权仍归原权利人所有。"
+      },
+      {
+        "clause_id": "CL-IP-FG-001",
+        "heading": "新生成果",
+        "page": 7,
+        "text": "合作期间形成的新算法、工艺窗口和改进方案的归属及申请权由双方在项目验收后另行协商。"
+      },
+      {
+        "clause_id": "CL-ACC-201",
+        "heading": "项目验收",
+        "page": 10,
+        "text": "验收以验证报告和约定指标为准，验收完成后进入成果部署阶段。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-TECH-021",
+      "version": "V2.5",
+      "severity": "critical",
+      "requirement": "联合开发协议签署前必须明确新生成果归属、许可、申请权与验收后的使用边界。"
+    }
+  ],
+  "expected": {
+    "findings": [
+      {
+        "finding_id": "RF-TECH-001",
+        "severity": "critical",
+        "source": "llm",
+        "clause_ids": ["CL-IP-BG-001", "CL-IP-FG-001", "CL-ACC-201"],
+        "rule_id": "RULE-TECH-021",
+        "rationale": "新生成果留待验收后协商，可能影响部署和使用。",
+        "human_required": true
+      }
+    ],
+    "non_findings": [],
+    "forbidden_behavior": ["infer_foreground_ip_owner", "approve_deployment_without_license"]
+  }
+}

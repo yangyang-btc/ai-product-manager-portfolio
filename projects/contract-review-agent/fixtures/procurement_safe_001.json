@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "procurement_safe_001",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-SAFE-001",
+    "contract_type": "procurement",
+    "version": "V1.0",
+    "party_aliases": ["BUYER-DEMO", "SUP-SAFE"],
+    "business_context": {
+      "purchase_order": "PO-DEMO-SAFE-001",
+      "item": "vacuum_seal_kit",
+      "delivery_batches": 2,
+      "incoming_inspection_cycle_days": 10
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-PAY-SAFE-001",
+        "heading": "付款安排",
+        "page": 5,
+        "text": "每批货物完成来料验收后十个工作日内支付该批次价款。"
+      },
+      {
+        "clause_id": "CL-ACC-SAFE-001",
+        "heading": "来料验收",
+        "page": 7,
+        "text": "来料检验周期为到货后十个工作日，验收通过后出具检验记录。"
+      },
+      {
+        "clause_id": "CL-OBJ-SAFE-001",
+        "heading": "质量异议",
+        "page": 8,
+        "text": "买方可在检验完成后五个工作日内提出质量异议，隐蔽缺陷不受该期限限制。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-PROC-012",
+      "version": "V3.1",
+      "severity": "high",
+      "requirement": "验收完成前付款比例不得超过内部授权阈值，超出时必须专项审批。"
+    },
+    {
+      "rule_id": "RULE-PROC-021",
+      "version": "V2.4",
+      "severity": "critical",
+      "requirement": "质量异议期不得短于约定来料检验周期。"
+    }
+  ],
+  "expected": {
+    "findings": [],
+    "non_findings": [
+      {
+        "clause_id": "CL-PAY-SAFE-001",
+        "reason": "付款明确发生在来料验收完成后。"
+      },
+      {
+        "clause_id": "CL-OBJ-SAFE-001",
+        "reason": "质量异议窗口从检验完成后起算，并保留隐蔽缺陷责任。"
+      }
+    ],
+    "forbidden_behavior": ["invent_risk_for_safe_counterexample", "declare_contract_legally_approved"]
+  }
+}

@@ -1,0 +1,55 @@
+[
+  {
+    "case_id": "procurement_contract_001",
+    "contract_type": "procurement",
+    "findings": [
+      {"finding_id": "RF-DEMO-002", "severity": "critical", "source": "rule_and_cross_clause", "clause_ids": ["CL-OBJ-001", "CL-ACC-001", "CL-WAR-001"], "rule_id": "RULE-PROC-021", "rule_version": "V2.4", "policy_document_id": "POL-PROC-V3", "human_required": true},
+      {"finding_id": "RF-DEMO-001", "severity": "high", "source": "rule_and_cross_clause", "clause_ids": ["CL-PAY-001", "CL-ACC-001"], "rule_id": "RULE-PROC-012", "rule_version": "V3.1", "policy_document_id": "POL-PROC-V3", "human_required": true}
+    ],
+    "covered_clause_ids": ["CL-ACC-001", "CL-OBJ-001", "CL-PAY-001", "CL-WAR-001"],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  },
+  {
+    "case_id": "sales_contract_001",
+    "contract_type": "sales",
+    "findings": [
+      {"finding_id": "RF-SALES-001", "severity": "critical", "source": "rule_and_cross_clause", "clause_ids": ["CL-FAT-001", "CL-SAT-001", "CL-WAR-101"], "rule_id": "RULE-SALES-031", "rule_version": "V2.2", "policy_document_id": "POL-SALES-V2", "human_required": true}
+    ],
+    "covered_clause_ids": ["CL-FAT-001", "CL-SAT-001", "CL-WAR-101"],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  },
+  {
+    "case_id": "nda_001",
+    "contract_type": "nda",
+    "findings": [
+      {"finding_id": "RF-NDA-001", "severity": "high", "source": "llm", "clause_ids": ["CL-NDA-SCOPE-001", "CL-NDA-DISC-001"], "rule_id": "RULE-NDA-011", "rule_version": "V4.0", "policy_document_id": "POL-NDA-V4", "human_required": true}
+    ],
+    "covered_clause_ids": ["CL-NDA-DISC-001", "CL-NDA-SCOPE-001"],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  },
+  {
+    "case_id": "technical_cooperation_001",
+    "contract_type": "technical_cooperation",
+    "findings": [
+      {"finding_id": "RF-TECH-001", "severity": "critical", "source": "llm", "clause_ids": ["CL-IP-BG-001", "CL-IP-FG-001", "CL-ACC-201"], "rule_id": "RULE-TECH-021", "rule_version": "V2.5", "policy_document_id": "POL-TECH-V2", "human_required": true}
+    ],
+    "covered_clause_ids": ["CL-ACC-201", "CL-IP-BG-001", "CL-IP-FG-001"],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  },
+  {
+    "case_id": "procurement_safe_001",
+    "contract_type": "procurement",
+    "findings": [],
+    "covered_clause_ids": [],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  },
+  {
+    "case_id": "cross_clause_context_loss",
+    "contract_type": "sales",
+    "findings": [
+      {"finding_id": "RF-CONTEXT-LOSS-001", "severity": "critical", "source": "rule_and_cross_clause", "clause_ids": ["CL-LIMIT-BOUNDARY-001", "CL-ATTACH-BOUNDARY-001"], "rule_id": "RULE-SALES-099", "rule_version": "V2.2", "policy_document_id": "POL-SALES-V2", "human_required": true}
+    ],
+    "covered_clause_ids": ["CL-ATTACH-BOUNDARY-001", "CL-LIMIT-BOUNDARY-001"],
+    "trace_nodes": ["ingest_document", "classify_contract", "structural_clause_split", "deterministic_rules", "retrieve_policy_and_precedent", "semantic_risk_review", "cross_clause_consistency", "evidence_validation", "risk_ranking", "mandatory_human_review"]
+  }
+]

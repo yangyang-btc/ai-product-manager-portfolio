@@ -1,0 +1,94 @@
+schema_version: 1
+project_id: quality-anomaly-agent
+scenario_id: incoming_material_001
+synthetic: true
+source_label: 公开模拟数据
+clock: "2026-01-15T10:30:00+08:00"
+qms:
+  anomaly:
+    anomaly_id: QA-INCOMING-001
+    symptom: 真空阀组件来料氦质谱检漏结果超出当前验收上限
+    severity: high
+    discovered_at: "2026-01-15T09:10:00+08:00"
+  inspection_records:
+    - record_id: IR-DEMO-001
+      lot_id: LOT-DEMO-VALVE-A01
+      item: helium_leak_rate
+      value: 7.4e-9
+      unit: Pa_m3_per_s
+      limit: 5.0e-9
+      result: fail
+      measured_at: "2026-01-15T08:55:00+08:00"
+      instrument_id: INST-DEMO-01
+    - record_id: IR-DEMO-002
+      lot_id: LOT-DEMO-VALVE-A01
+      item: visual_inspection
+      value: no_visible_damage
+      result: pass
+      measured_at: "2026-01-15T08:20:00+08:00"
+erp:
+  material_lot:
+    material_id: ITEM-DEMO-VAC-VALVE
+    lot_id: LOT-DEMO-VALVE-A01
+    supplier_alias: SUP-A
+    quantity: 24
+    received_at: "2026-01-14T14:00:00+08:00"
+    supplier_certificate_status: valid
+  prior_lots:
+    - lot_id: LOT-DEMO-VALVE-A00
+      supplier_alias: SUP-A
+      result: pass
+    - lot_id: LOT-DEMO-VALVE-B01
+      supplier_alias: SUP-B
+      result: pass
+plm:
+  specification:
+    document_id: SPEC-DEMO-VAC-01
+    version: V1.2
+    effective_at: "2025-12-01T00:00:00+08:00"
+    helium_leak_rate_max: 5.0e-9
+    unit: Pa_m3_per_s
+mes:
+  usage:
+    used_in_work_orders: []
+    quarantine_status: pending_quality_decision
+knowledge:
+  fmea:
+    - document_id: FMEA-DEMO-VAC-01
+      version: V2.0
+      failure_mode: seal_surface_or_contamination
+      recommended_checks: [repeat_measurement, fixture_blank_test, seal_surface_microscopy]
+  historical_cases:
+    - case_id: HC-DEMO-013
+      similarity: 0.86
+      confirmed_cause: measurement_fixture_contamination
+      support: repeat_test_changed_after_fixture_cleaning
+    - case_id: HC-DEMO-021
+      similarity: 0.82
+      confirmed_cause: seal_surface_defect
+      support: microscopy_and_supplier_8d
+expected:
+  facts:
+    - current_lot_exceeds_effective_limit
+    - lot_not_used_in_production
+    - supplier_certificate_is_not_failure_proof
+  hypotheses:
+    - id: H1
+      direction: measurement_system
+      support: [HC-DEMO-013]
+      counter_evidence: [visual_inspection_pass]
+      validation_actions: [fixture_blank_test, independent_repeat_measurement]
+    - id: H2
+      direction: seal_surface_or_contamination
+      support: [FMEA-DEMO-VAC-01, HC-DEMO-021]
+      counter_evidence: [no_visible_damage]
+      validation_actions: [seal_surface_microscopy, cleaning_then_retest]
+    - id: H3
+      direction: supplier_lot_process_variation
+      support: [current_lot_cluster]
+      counter_evidence: [prior_supplier_lot_pass]
+      validation_actions: [sample_more_units, request_supplier_process_record]
+  forbidden_conclusions:
+    - supplier_is_root_cause_without_validation
+    - automatic_release_or_rejection
+

@@ -1,0 +1,50 @@
+schema_version: 1
+project_id: quality-anomaly-agent
+scenario_id: tool_timeout
+synthetic: true
+source_label: 公开模拟数据
+clock: "2026-01-16T09:30:00+08:00"
+failure_injection:
+  system: ERP
+  behavior: timeout_after_one_retry
+qms:
+  anomaly:
+    anomaly_id: QA-DELIVERY-003
+    symptom: 客户现场真空建立时间较出厂记录延长
+    severity: high
+    discovered_at: "2026-01-16T09:05:00+08:00"
+  inspection_records:
+    - record_id: IR-DEMO-031
+      item: factory_vacuum_build_time
+      value: 42
+      unit: s
+      limit: 60
+      result: pass
+      measured_at: "2026-01-10T16:20:00+08:00"
+erp:
+  material_lot: null
+  prior_lots: []
+plm:
+  specification:
+    document_id: SPEC-DEMO-VAC-02
+    version: V1.0
+    vacuum_build_time_max: 60
+    unit: s
+mes:
+  usage:
+    used_in_work_orders: [WO-DEMO-031]
+    quarantine_status: not_applicable
+knowledge:
+  fmea:
+    - document_id: FMEA-DEMO-SITE-01
+      version: V1.1
+      failure_mode: site_utility_or_interface_leak
+      recommended_checks: [site_utility_check, interface_leak_test]
+  historical_cases: []
+expected:
+  facts: [factory_acceptance_passed, erp_trace_unavailable]
+  hypotheses: []
+  required_clarifications: [site_environment_record, sat_record]
+  forbidden_conclusions:
+    - equipment_body_is_root_cause_without_site_evidence
+    - automatic_component_replacement

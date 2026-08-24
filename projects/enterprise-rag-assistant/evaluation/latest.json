@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project_id": "enterprise-rag-assistant",
+  "dataset_version": "enterprise-query-cases-v1",
+  "workflow_version": "enterprise-rag-workflow-v1",
+  "metric_definition_version": "enterprise-rag-v1",
+  "source_label": "模拟数据运行结果",
+  "metrics": {
+    "case_count": 10,
+    "intent_accuracy": 1.0,
+    "route_accuracy": 1.0,
+    "rewrite_fidelity": 1.0,
+    "citation_accuracy": 1.0,
+    "faithfulness": 1.0,
+    "refusal_accuracy": 1.0,
+    "clarification_accuracy": 1.0,
+    "permission_interception": 1.0
+  },
+  "cases": [
+    {"case_id": "supplier_relationship_001", "route": "rag", "result_type": "answer"},
+    {"case_id": "process_flow_001", "route": "rag", "result_type": "answer"},
+    {"case_id": "terminology_alias_001", "route": "rag", "result_type": "answer"},
+    {"case_id": "compound_query_001", "route": "rag_and_tool", "result_type": "table"},
+    {"case_id": "realtime_order_001", "route": "tool", "result_type": "answer"},
+    {"case_id": "missing_constraint_001", "route": "clarify", "result_type": "clarification"},
+    {"case_id": "no_answer_001", "route": "refuse", "result_type": "refusal"},
+    {"case_id": "permission_denied_001", "route": "permission_stop", "result_type": "permission_denied"},
+    {"case_id": "conflicting_sources_001", "route": "version_check", "result_type": "clarification"},
+    {"case_id": "rewrite_fidelity_001", "route": "rag", "result_type": "answer"}
+  ],
+  "release_passed": true,
+  "gate_reasons": []
+}

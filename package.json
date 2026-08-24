@@ -1,0 +1,13 @@
+{
+  "name": "ai-product-manager-portfolio-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "build": "pnpm -r --if-present run build",
+    "build:pages": "node tools/build_pages_artifact.mjs",
+    "lint": "pnpm -r --if-present run lint",
+    "test": "pnpm -r --if-present run test",
+    "test:browser-consoles": "pnpm --filter @portfolio/contract-console test && pnpm --filter @portfolio/rag-console test"
+  }
+}

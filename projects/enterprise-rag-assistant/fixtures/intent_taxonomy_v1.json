@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project_id": "enterprise-rag-assistant",
+  "taxonomy_version": "enterprise-intent-taxonomy-v1",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "definitions": [
+    {"level_1": "enterprise_supplier", "level_2": "enterprise_profile", "keywords": ["企业画像", "企业介绍", "企业信息"], "example": "查看华东某企业的企业画像"},
+    {"level_1": "enterprise_supplier", "level_2": "supplier_qualification", "keywords": ["供应商资质", "ISO", "准入"], "example": "哪些供应商具有 ISO9001 资质"},
+    {"level_1": "enterprise_supplier", "level_2": "supply_relationship", "keywords": ["供应关系", "供应证据", "上下游"], "example": "哪些供应商有真空阀组件的有效供应证据"},
+    {"level_1": "enterprise_supplier", "level_2": "supplier_capability", "keywords": ["供应商能力", "能做", "加工能力", "产能"], "example": "哪些供应商能做精密清洗"},
+    {"level_1": "product_material", "level_2": "product_specification", "keywords": ["产品规格", "物料规格", "技术规格"], "example": "真空阀组件的产品规格是什么"},
+    {"level_1": "product_material", "level_2": "category_application", "keywords": ["应用场景", "用于什么", "类目应用"], "example": "精密运动模组用于什么设备"},
+    {"level_1": "product_material", "level_2": "alias_resolution", "keywords": ["术语", "别名", "简称", "氦检"], "example": "厂里说的氦检在知识库应该搜什么"},
+    {"level_1": "product_material", "level_2": "substitute_material", "keywords": ["替代物料", "替代材料", "可替代"], "example": "这个密封材料有哪些可替代物料"},
+    {"level_1": "manufacturing_process", "level_2": "process_flow", "keywords": ["工艺流程", "工序", "从机加到"], "example": "精密金属件从机加到表面处理有哪些工序"},
+    {"level_1": "manufacturing_process", "level_2": "process_parameter", "keywords": ["工艺参数", "温度窗口", "参数范围"], "example": "真空烘烤的有效温度窗口是多少"},
+    {"level_1": "manufacturing_process", "level_2": "quality_control_point", "keywords": ["质量控制点", "质控点", "检验点"], "example": "精密清洗有哪些关键质量控制点"},
+    {"level_1": "manufacturing_process", "level_2": "equipment_requirement", "keywords": ["设备要求", "需要什么设备", "加工设备"], "example": "氦质谱检漏需要什么设备"},
+    {"level_1": "platform_knowledge", "level_2": "platform_rule", "keywords": ["平台规则", "平台制度", "业务规则"], "example": "平台供应商准入规则是什么"},
+    {"level_1": "platform_knowledge", "level_2": "contract_policy", "keywords": ["合同政策", "合同制度", "审查规则"], "example": "采购合同有哪些必审规则"},
+    {"level_1": "platform_knowledge", "level_2": "onboarding_training", "keywords": ["新员工", "培训", "入职"], "example": "新员工如何学习供应链业务"},
+    {"level_1": "platform_knowledge", "level_2": "permission_help", "keywords": ["权限帮助", "申请权限", "看不到"], "example": "我看不到供应商价格如何申请权限"},
+    {"level_1": "realtime_transaction", "level_2": "inquiry_status", "keywords": ["询价状态", "当前询价", "询价进度"], "example": "当前询价进行到什么状态"},
+    {"level_1": "realtime_transaction", "level_2": "quotation_status", "keywords": ["报价状态", "已报价", "报价明细"], "example": "当前有几家供应商已报价"},
+    {"level_1": "realtime_transaction", "level_2": "order_status", "keywords": ["订单状态", "订单", "发货了吗"], "example": "订单 ORD-DEMO-001 现在发货了吗"},
+    {"level_1": "realtime_transaction", "level_2": "logistics_status", "keywords": ["物流状态", "物流", "到哪了"], "example": "订单的物流现在到哪了"},
+    {"level_1": "composite_analysis", "level_2": "supplier_comparison", "keywords": ["比较供应商", "供应商对比", "推荐供应商"], "example": "比较三家供应商并给出差异"},
+    {"level_1": "composite_analysis", "level_2": "supply_chain_trace", "keywords": ["供应链追溯", "追溯上游", "供应链路"], "example": "追溯这个物料的上游供应链路"},
+    {"level_1": "composite_analysis", "level_2": "process_supply_match", "keywords": ["工艺供应匹配", "工艺匹配供应商", "匹配供应商"], "example": "按精密清洗工艺匹配供应商"},
+    {"level_1": "composite_analysis", "level_2": "knowledge_and_realtime", "keywords": ["并告诉我当前", "知识和实时", "同时查询"], "example": "找出能做精密清洗的供应商并告诉我当前询价有几家已报价"}
+  ]
+}

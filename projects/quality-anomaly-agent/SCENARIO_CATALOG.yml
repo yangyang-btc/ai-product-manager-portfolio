@@ -1,0 +1,84 @@
+schema_version: 1
+project_id: quality-anomaly-agent
+scenarios:
+  - id: incoming_material_001
+    user_role: quality_engineer
+    scene: incoming
+    summary: 真空阀组件来料泄漏率超出虚构验收上限。
+    required_objects: [anomaly, material_lot, supplier, inspection_record, specification, historical_case]
+    expected_route: [validate, query_qms, query_erp, retrieve_fmea, retrieve_cases, evidence_check, hypothesis, human_review]
+    expected_evidence: [current_inspection, effective_specification, lot_history, supplier_lot_context]
+    expected_decision: 输出批次、测量系统和装配界面三类假设，不认定唯一根因。
+    human_boundary: 质量工程师决定复测、隔离与供应商处置。
+    tags: [cross_system, counter_evidence, top3]
+  - id: assembly_001
+    user_role: quality_engineer
+    scene: assembly
+    summary: 装配后运动精度波动，实际 BOM 批次与标准工艺无显著单点异常。
+    required_objects: [equipment, work_order, bom_snapshot, material_lot, process_record, inspection_record]
+    expected_route: [validate, query_mes, query_plm, query_qms, retrieve_sop, evidence_check, hypothesis, human_review]
+    expected_evidence: [actual_bom, torque_record, alignment_record, process_spec]
+    expected_decision: 保留装配工艺、测量重复性和部件批次三个待验证方向。
+    human_boundary: 工艺/研发确认复测与拆检计划。
+    tags: [missing_information, multi_factor]
+  - id: debug_test_001
+    user_role: test_engineer
+    scene: debug
+    summary: 软件升级后温控曲线周期性偏移。
+    required_objects: [equipment, software_config, process_record, test_record, change_record]
+    expected_route: [validate, query_mes, query_software_config, query_test_data, retrieve_change_sop, evidence_check, hypothesis, human_review]
+    expected_evidence: [software_version, parameter_set, sensor_trace, change_window]
+    expected_decision: 区分软件参数、传感器漂移和环境扰动，给出 A/B 复现动作。
+    human_boundary: 研发审批版本回退或参数变更。
+    tags: [version, temporal_evidence]
+  - id: delivery_001
+    user_role: field_quality_engineer
+    scene: delivery
+    summary: 出厂验收正常，客户现场运行出现间歇报警。
+    required_objects: [equipment, fat_record, sat_record, site_environment, software_config, change_record]
+    expected_route: [validate, query_qms, query_delivery, query_config, retrieve_cases, evidence_conflict, human_review]
+    expected_evidence: [fat_result, sat_result, site_environment, configuration_delta]
+    expected_decision: 显式标记出厂与现场证据差异，不直接归因设备本体。
+    human_boundary: 现场工程师确认环境复现与变更。
+    tags: [evidence_conflict, site_context]
+  - id: no_evidence
+    user_role: quality_engineer
+    scene: incoming
+    summary: 只提供模糊异常文本，无设备、工单或批次标识。
+    required_objects: [anomaly]
+    expected_route: [validate, clarify, stop]
+    expected_evidence: []
+    expected_decision: 不生成根因，追问关键标识。
+    human_boundary: 用户补充必要信息。
+    tags: [no_evidence, clarification]
+  - id: evidence_conflict
+    user_role: quality_engineer
+    scene: assembly
+    summary: MES 与纸质扫码记录的物料批次不一致。
+    required_objects: [work_order, bom_snapshot, scan_record, material_lot]
+    expected_route: [validate, query_mes, query_qms, evidence_conflict, human_review]
+    expected_evidence: [mes_lot, scan_lot]
+    expected_decision: 标记冲突并暂停假设收敛。
+    human_boundary: 物料追溯负责人确认实际投料批次。
+    tags: [conflict, manual_required]
+  - id: historical_correlation_trap
+    user_role: quality_engineer
+    scene: debug
+    summary: 历史案例与当前传感器批次相似，但当前检验和交叉替换未支持因果。
+    required_objects: [material_lot, historical_case, inspection_record, substitution_test]
+    expected_route: [validate, query_tools, retrieve_cases, evidence_check, hypothesis, human_review]
+    expected_evidence: [historical_similarity, current_inspection, substitution_result]
+    expected_decision: 将批次问题保留为低置信假设并列出反证。
+    human_boundary: 研发/质量决定是否扩大交叉验证。
+    tags: [bad_case, correlation_not_causation]
+  - id: tool_timeout
+    user_role: quality_engineer
+    scene: delivery
+    summary: ERP 批次追溯 Tool 超时，其他证据已返回。
+    required_objects: [anomaly, equipment, partial_evidence]
+    expected_route: [validate, query_tools, retry_once, degraded, human_review]
+    expected_evidence: [available_qms, available_mes]
+    expected_decision: 保留已取得证据，显示缺失来源并禁止确定性结论。
+    human_boundary: 用户重试或转人工追溯。
+    tags: [failure, degraded]
+

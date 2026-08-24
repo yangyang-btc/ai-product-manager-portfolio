@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "project_id": "enterprise-rag-assistant",
+  "dataset_version": "enterprise-business-data-v1",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "clock": "2026-02-10T11:00:00+08:00",
+  "knowledge_data": {
+    "source_type": "public_reconstruction",
+    "terminology": [
+      {
+        "canonical": "氦质谱检漏",
+        "aliases": ["氦检"],
+        "confused_with": ["真空保压测试"]
+      },
+      {
+        "canonical": "precision_cleaning",
+        "aliases": ["精密清洗", "高洁净清洗"],
+        "confused_with": ["general_degreasing"]
+      }
+    ],
+    "suppliers": [
+      {
+        "supplier_id": "SUP-DEMO-101",
+        "region": "east_china",
+        "capabilities": ["precision_cleaning", "particle_inspection"],
+        "certifications": ["ISO9001"]
+      },
+      {
+        "supplier_id": "SUP-DEMO-102",
+        "region": "east_china",
+        "capabilities": ["general_degreasing"],
+        "certifications": ["ISO9001"]
+      },
+      {
+        "supplier_id": "SUP-DEMO-103",
+        "region": "north_china",
+        "capabilities": ["precision_cleaning", "vacuum_bake"],
+        "certifications": ["ISO9001", "ISO14001"]
+      },
+      {
+        "supplier_id": "SUP-DEMO-104",
+        "region": "south_china",
+        "capabilities": ["precision_machining"],
+        "certifications": ["ISO9001"]
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "REL-DEMO-501",
+        "supplier_id": "SUP-DEMO-101",
+        "item_category": "precision_metal_parts",
+        "capability": "precision_cleaning",
+        "valid_from": "2025-01-01",
+        "valid_to": "2026-12-31",
+        "evidence_id": "CIT-DEMO-CONTRACT-01"
+      },
+      {
+        "relationship_id": "REL-DEMO-502",
+        "supplier_id": "SUP-DEMO-103",
+        "item_category": "vacuum_components",
+        "capability": "precision_cleaning",
+        "valid_from": "2025-06-01",
+        "valid_to": "2026-06-30",
+        "evidence_id": "CIT-DEMO-CONTRACT-02"
+      }
+    ],
+    "documents": [
+      {
+        "document_id": "CIT-DEMO-PROCESS-01",
+        "version": "V2",
+        "source": "PROCESS",
+        "title": "精密金属件工艺流程",
+        "text": "机加、去毛刺、精密清洗、表面处理、粒子检查是主要工序和质量控制点。"
+      },
+      {
+        "document_id": "CIT-DEMO-TERM-01",
+        "version": "V3",
+        "source": "TERMINOLOGY",
+        "title": "行业术语库",
+        "text": "氦检的标准名称是氦质谱检漏；高洁净清洗映射为精密清洗。"
+      },
+      {
+        "document_id": "CIT-DEMO-PROCESS-OLD",
+        "version": "V1-EXPIRED",
+        "source": "PROCESS",
+        "title": "旧工艺温度窗口",
+        "text": "旧版本温度窗口为 120 至 150 摄氏度，已失效。"
+      },
+      {
+        "document_id": "CIT-DEMO-PROCESS-CURRENT",
+        "version": "V2",
+        "source": "PROCESS",
+        "title": "当前工艺温度窗口",
+        "text": "当前有效温度窗口为 130 至 145 摄氏度，需工艺工程师确认适用产品。"
+      },
+      {
+        "document_id": "CIT-DEMO-SUPPLIER-QUAL-01",
+        "version": "V1",
+        "source": "SUPPLIER_PROFILE",
+        "title": "华东供应商资质摘要",
+        "text": "SUP-DEMO-101 位于华东，具备 ISO9001 资质；交期需按当前产能另行确认。"
+      }
+    ]
+  },
+  "realtime_data": {
+    "source_type": "simulated_extension",
+    "inquiry": {
+      "inquiry_id": "INQ-DEMO-001",
+      "item_category": "precision_metal_parts",
+      "status": "quoting",
+      "updated_at": "2026-02-10T10:45:00+08:00"
+    },
+    "quotations": [
+      {
+        "quotation_id": "QUO-DEMO-001",
+        "inquiry_id": "INQ-DEMO-001",
+        "supplier_id": "SUP-DEMO-101",
+        "status": "submitted",
+        "updated_at": "2026-02-10T09:20:00+08:00"
+      },
+      {
+        "quotation_id": "QUO-DEMO-002",
+        "inquiry_id": "INQ-DEMO-001",
+        "supplier_id": "SUP-DEMO-103",
+        "status": "invited",
+        "updated_at": "2026-02-09T16:00:00+08:00"
+      },
+      {
+        "quotation_id": "QUO-DEMO-003",
+        "inquiry_id": "INQ-DEMO-001",
+        "supplier_id": "SUP-DEMO-104",
+        "status": "submitted",
+        "updated_at": "2026-02-10T10:05:00+08:00"
+      }
+    ],
+    "orders": [
+      {
+        "order_id": "ORD-DEMO-001",
+        "status": "待发货",
+        "updated_at": "2026-02-10T10:45:00+08:00"
+      }
+    ]
+  }
+}

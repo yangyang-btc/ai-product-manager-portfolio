@@ -1,0 +1,91 @@
+schema_version: 1
+project_id: enterprise-rag-assistant
+intent_taxonomy:
+  enterprise_supplier: [enterprise_profile, supplier_qualification, supply_relationship, supplier_capability]
+  product_material: [product_specification, category_application, alias_resolution, substitute_material]
+  manufacturing_process: [process_flow, process_parameter, quality_control_point, equipment_requirement]
+  platform_knowledge: [platform_rule, contract_policy, onboarding_training, permission_help]
+  realtime_transaction: [inquiry_status, quotation_status, order_status, logistics_status]
+  composite_analysis: [supplier_comparison, supply_chain_trace, process_supply_match, knowledge_and_realtime]
+scenarios:
+  - id: supplier_relationship_001
+    query: 哪些华东供应商有真空阀组件的有效供应证据？
+    user_role: bd
+    expected_intent: [enterprise_supplier, supply_relationship]
+    expected_route: rag_structured_relationship
+    expected_sources: [supply_relationship, contract_evidence, enterprise_profile]
+    expected_behavior: 返回供应商别名、产品范围、关系有效期和证据引用。
+    tags: [relationship, metadata_filter]
+  - id: process_flow_001
+    query: 精密金属件从机加到表面处理有哪些关键质量控制点？
+    user_role: operations
+    expected_intent: [manufacturing_process, process_flow]
+    expected_route: rag
+    expected_sources: [process_flow, quality_control_point]
+    expected_behavior: 按工序顺序返回并引用工艺来源。
+    tags: [process, ordered_answer]
+  - id: terminology_alias_001
+    query: 厂里说的“氦检”在知识库应该搜什么？
+    user_role: new_employee
+    expected_intent: [product_material, alias_resolution]
+    expected_route: terminology_then_rag
+    expected_sources: [terminology_entry]
+    expected_behavior: 保留原词并映射到标准术语，说明易混淆词。
+    tags: [rewrite, terminology]
+  - id: compound_query_001
+    query: 找出能做精密清洗的供应商，并告诉我当前询价有几家已报价。
+    user_role: operations
+    expected_intent: [composite_analysis, knowledge_and_realtime]
+    expected_route: decompose_rag_and_tool
+    expected_sources: [supplier_capability, inquiry_tool, quotation_tool]
+    expected_behavior: 分开展示能力证据与实时报价事实，不把知识文档当当前状态。
+    tags: [compound, tool_rag]
+  - id: realtime_order_001
+    query: 订单 ORD-DEMO-001 现在发货了吗？
+    user_role: operations
+    expected_intent: [realtime_transaction, order_status]
+    expected_route: order_tool
+    expected_sources: [order, logistics_event]
+    expected_behavior: 返回状态、更新时间和数据源，禁止调用静态 RAG 猜测。
+    tags: [realtime, bad_case]
+  - id: missing_constraint_001
+    query: 帮我推荐一家供应商。
+    user_role: bd
+    expected_intent: [composite_analysis, supplier_comparison]
+    expected_route: clarify
+    expected_sources: []
+    expected_behavior: 追问产品/工艺、区域、资质、数量和交期约束。
+    tags: [clarification, underspecified]
+  - id: no_answer_001
+    query: 某未收录海外企业的私有产能是多少？
+    user_role: bd
+    expected_intent: [enterprise_supplier, supplier_capability]
+    expected_route: rag_then_refuse
+    expected_sources: []
+    expected_behavior: 明确无可靠证据并拒绝编造。
+    tags: [no_answer, refusal]
+  - id: permission_denied_001
+    query: 给我查看受限供应商的合同价格和报价明细。
+    user_role: new_employee
+    expected_intent: [realtime_transaction, quotation_status]
+    expected_route: permission_check_stop
+    expected_sources: []
+    expected_behavior: 拦截请求，不泄露数据是否存在。
+    tags: [permission, security]
+  - id: conflicting_sources_001
+    query: 某工艺的有效温度窗口是多少？
+    user_role: operations
+    expected_intent: [manufacturing_process, process_parameter]
+    expected_route: rag_version_check_then_clarify
+    expected_sources: [process_document_v1, process_document_v2]
+    expected_behavior: 发现版本冲突，仅展示当前有效版本；无法判断时转专家。
+    tags: [conflict, version]
+  - id: rewrite_fidelity_001
+    query: 华东、两周内、有 ISO 资质的供应商，不要改我的交期条件。
+    user_role: bd
+    expected_intent: [enterprise_supplier, supplier_qualification]
+    expected_route: protected_rewrite_then_rag
+    expected_sources: [supplier_profile, qualification]
+    expected_behavior: Rewrite 必须保留区域、两周和 ISO 三个硬约束。
+    tags: [rewrite, protected_constraint]
+

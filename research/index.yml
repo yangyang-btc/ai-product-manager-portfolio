@@ -1,0 +1,35 @@
+schema_version: 1
+updated_at: "2026-08-23"
+articles:
+  - slug: codex
+    product: Codex
+    vendor: OpenAI
+    title: "Codex 产品拆解：从代码生成工具到多 Agent 工程工作台"
+    summary: "Codex 的核心变化不是会写更多代码，而是把并行任务、隔离环境、可复用流程和人工复核放进同一个工作台。"
+    tags: [multi-agent, worktree, skills, evaluation]
+    reading_minutes: 12
+    updated_at: "2026-08-23"
+  - slug: workbuddy
+    product: WorkBuddy
+    vendor: Tencent
+    title: "WorkBuddy 产品拆解：AI 办公产品如何从回答问题走向交付成果"
+    summary: "WorkBuddy 把文档、表格、PPT 和本地文件处理放进任务工作区，它真正要竞争的是交付物完成率。"
+    tags: [office-agent, artifact, connector, permission]
+    reading_minutes: 11
+    updated_at: "2026-08-23"
+  - slug: claude-code
+    product: Claude Code
+    vendor: Anthropic
+    title: "Claude Code 产品拆解：终端原生 Agent 如何设计上下文、权限与自主性"
+    summary: "Claude Code 把上下文、权限和扩展机制做成可读、可配置、可审计的工程对象。"
+    tags: [terminal-agent, context, permissions, hooks]
+    reading_minutes: 12
+    updated_at: "2026-08-23"
+  - slug: cursor
+    product: Cursor
+    vendor: Anysphere
+    title: "Cursor 产品拆解：AI 编程产品如何设计“自主性滑杆”"
+    summary: "Cursor 没有把自主性设计成单一开关，而是用模式、权限、环境和交付界面让用户调节委托强度。"
+    tags: [ai-editor, autonomy, background-agent, rules]
+    reading_minutes: 11
+    updated_at: "2026-08-23"

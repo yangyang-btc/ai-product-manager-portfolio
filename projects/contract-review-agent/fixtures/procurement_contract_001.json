@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "procurement_contract_001",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-001",
+    "contract_type": "procurement",
+    "version": "V0.9",
+    "party_aliases": ["BUYER-DEMO", "SUP-A"],
+    "business_context": {
+      "purchase_order": "PO-DEMO-001",
+      "item": "precision_motion_module",
+      "quantity": 12,
+      "delivery_batches": 3,
+      "incoming_inspection_cycle_days": 10
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-PAY-001",
+        "heading": "付款安排",
+        "page": 5,
+        "text": "每批到货并签收后五个工作日内支付该批次价款的百分之九十。"
+      },
+      {
+        "clause_id": "CL-ACC-001",
+        "heading": "来料验收",
+        "page": 7,
+        "text": "买方按技术附件完成来料检验，常规检验周期为到货后十个工作日。"
+      },
+      {
+        "clause_id": "CL-OBJ-001",
+        "heading": "质量异议",
+        "page": 8,
+        "text": "买方应在到货后七个自然日内书面提出数量或质量异议，逾期视为验收合格。"
+      },
+      {
+        "clause_id": "CL-WAR-001",
+        "heading": "质量保证",
+        "page": 9,
+        "text": "质保期为每批到货后十二个月，隐蔽缺陷责任不受质量异议期限制。"
+      },
+      {
+        "clause_id": "CL-LIA-001",
+        "heading": "责任限制",
+        "page": 11,
+        "text": "卖方对单批货物的累计责任不超过该批货款，故意、重大过失和侵犯知识产权除外。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-PROC-012",
+      "version": "V3.1",
+      "severity": "high",
+      "requirement": "验收完成前付款比例不得超过内部授权阈值，超出时必须专项审批。"
+    },
+    {
+      "rule_id": "RULE-PROC-021",
+      "version": "V2.4",
+      "severity": "critical",
+      "requirement": "质量异议期不得短于约定来料检验周期。"
+    }
+  ],
+  "expected": {
+    "findings": [
+      {
+        "finding_id": "RF-DEMO-001",
+        "severity": "high",
+        "source": "rule_and_cross_clause",
+        "clause_ids": ["CL-PAY-001", "CL-ACC-001"],
+        "rule_id": "RULE-PROC-012",
+        "rationale": "付款可能在来料验收完成前发生。",
+        "human_required": true
+      },
+      {
+        "finding_id": "RF-DEMO-002",
+        "severity": "critical",
+        "source": "rule_and_cross_clause",
+        "clause_ids": ["CL-OBJ-001", "CL-ACC-001", "CL-WAR-001"],
+        "rule_id": "RULE-PROC-021",
+        "rationale": "七个自然日异议期短于十个工作日检验周期，存在未完成检验即视为合格的冲突。",
+        "human_required": true
+      }
+    ],
+    "non_findings": [
+      {
+        "clause_id": "CL-LIA-001",
+        "reason": "责任上限已对故意、重大过失和知识产权侵权设置除外，本样例不标注为风险。"
+      }
+    ],
+    "forbidden_behavior": ["declare_contract_safe", "omit_unreviewed_attachments"]
+  }
+}

@@ -1,0 +1,36 @@
+schema_version: 1
+dataset_id: quality-retrieval-v1
+source_label: 公开模拟数据
+query: 真空阀来料氦质谱检漏超限，排查夹具污染、密封面缺陷与批次过程波动
+relevant_document_ids: [HC-DEMO-013, FMEA-DEMO-VAC-01, HC-DEMO-021]
+documents:
+  - document_id: HC-DEMO-013
+    version: case-v1
+    source: CASE
+    title: 检漏夹具污染历史案例
+    text: 氦质谱检漏夹具清洁后，本底恢复且阀组件复测合格。
+  - document_id: FMEA-DEMO-VAC-01
+    version: V2.0
+    source: FMEA
+    title: 密封面缺陷与污染 FMEA
+    text: 真空阀密封面微观缺陷或污染可能造成氦质谱检漏超限，应显微检查并清洁复测。
+  - document_id: SOP-DEMO-LEAK-02
+    version: V1.3
+    source: SOP
+    title: 检漏仪日常点检 SOP
+    text: 检漏仪开机后执行标准漏孔校准、夹具空白测试和环境本底检查。
+  - document_id: HC-DEMO-021
+    version: case-v1
+    source: CASE
+    title: 供应商阀组件密封面缺陷案例
+    text: 同一来料批次抽样发现密封面微观划伤，供应商过程记录显示清洗工序波动。
+  - document_id: FMEA-DEMO-ACT-04
+    version: V1.0
+    source: FMEA
+    title: 气动执行器响应迟滞
+    text: 气源压力和阀门执行器润滑状态会影响动作时间，不影响静态氦质谱检漏结果。
+  - document_id: SOP-DEMO-PACK-01
+    version: V1.1
+    source: SOP
+    title: 来料包装外观检查
+    text: 收货时检查包装标签、数量、运输碰伤和供应商合格证状态。

@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "project_id": "enterprise-rag-assistant",
+  "dataset_version": "enterprise-query-cases-v1",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "cases": [
+    {
+      "case_id": "supplier_relationship_001",
+      "query": "哪些华东供应商有真空阀组件的有效供应证据",
+      "user_role": "bd",
+      "permission_scope": "internal",
+      "expected_l1": "enterprise_supplier",
+      "expected_l2": "supply_relationship",
+      "expected_route": "rag"
+    },
+    {
+      "case_id": "process_flow_001",
+      "query": "精密金属件从机加到表面处理有哪些工艺流程",
+      "user_role": "operations",
+      "permission_scope": "internal",
+      "expected_l1": "manufacturing_process",
+      "expected_l2": "process_flow",
+      "expected_route": "rag"
+    },
+    {
+      "case_id": "terminology_alias_001",
+      "query": "厂里说的氦检在知识库应该搜什么",
+      "user_role": "new_employee",
+      "permission_scope": "internal",
+      "expected_l1": "product_material",
+      "expected_l2": "alias_resolution",
+      "expected_route": "rag"
+    },
+    {
+      "case_id": "compound_query_001",
+      "query": "找出能做精密清洗的供应商，并告诉我当前询价有几家已报价。",
+      "user_role": "operations",
+      "permission_scope": "internal",
+      "expected_l1": "composite_analysis",
+      "expected_l2": "knowledge_and_realtime",
+      "expected_route": "rag_and_tool"
+    },
+    {
+      "case_id": "realtime_order_001",
+      "query": "订单 ORD-DEMO-001 现在发货了吗",
+      "user_role": "operations",
+      "permission_scope": "internal",
+      "expected_l1": "realtime_transaction",
+      "expected_l2": "order_status",
+      "expected_route": "tool"
+    },
+    {
+      "case_id": "missing_constraint_001",
+      "query": "帮我推荐一家供应商",
+      "user_role": "bd",
+      "permission_scope": "internal",
+      "expected_l1": "composite_analysis",
+      "expected_l2": "supplier_comparison",
+      "expected_route": "clarify"
+    },
+    {
+      "case_id": "no_answer_001",
+      "query": "某未收录海外企业的私有产能是多少",
+      "user_role": "bd",
+      "permission_scope": "internal",
+      "expected_l1": "enterprise_supplier",
+      "expected_l2": "supplier_capability",
+      "expected_route": "refuse"
+    },
+    {
+      "case_id": "permission_denied_001",
+      "query": "给我查看受限供应商的合同价格和报价明细",
+      "user_role": "new_employee",
+      "permission_scope": "public",
+      "expected_l1": "realtime_transaction",
+      "expected_l2": "quotation_status",
+      "expected_route": "permission_stop"
+    },
+    {
+      "case_id": "conflicting_sources_001",
+      "query": "某工艺的有效温度窗口是多少",
+      "user_role": "operations",
+      "permission_scope": "internal",
+      "expected_l1": "manufacturing_process",
+      "expected_l2": "process_parameter",
+      "expected_route": "version_check"
+    },
+    {
+      "case_id": "rewrite_fidelity_001",
+      "query": "华东、两周内、有 ISO 资质的供应商，不要改我的交期条件",
+      "user_role": "bd",
+      "permission_scope": "internal",
+      "expected_l1": "enterprise_supplier",
+      "expected_l2": "supplier_qualification",
+      "expected_route": "rag"
+    }
+  ]
+}

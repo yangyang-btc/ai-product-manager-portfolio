@@ -1,0 +1,47 @@
+schema_version: 1
+product: Codex
+vendor: OpenAI
+official_domains: [openai.com, developers.openai.com, help.openai.com]
+researched_at: "2026-08-23"
+applicable_version: "Codex 官方产品与文档，访问于 2026-08-23"
+sources:
+  - id: CODEX-01
+    title: Introducing the Codex app
+    url: https://openai.com/index/introducing-the-codex-app/
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-03-04 页面更新"
+    source_kind: product_announcement
+    claim_scope: "多 Agent、Skills、Automations、安全与可用性"
+    license_note: "仅作事实引用；未复制图片、Logo 或长段原文。"
+  - id: CODEX-02
+    title: Worktrees
+    url: https://developers.openai.com/codex/app/worktrees
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Git worktree、并行任务、Local/Worktree Handoff"
+    license_note: "仅作事实引用。"
+  - id: CODEX-03
+    title: Build skills
+    url: https://developers.openai.com/codex/skills
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Skill 结构、触发与分发"
+    license_note: "仅作事实引用。"
+  - id: CODEX-04
+    title: Scheduled tasks
+    url: https://developers.openai.com/codex/app/automations
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "定时任务与审查队列"
+    license_note: "仅作事实引用。"
+  - id: CODEX-05
+    title: Codex security
+    url: https://developers.openai.com/codex/security
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "沙箱、审批与网络边界"
+    license_note: "仅作事实引用。"

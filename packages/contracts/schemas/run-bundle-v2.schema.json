@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/run-bundle-v2.schema.json",
+  "title": "Public Browser Run Bundle v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "case_id",
+    "run_id",
+    "trace_id",
+    "status",
+    "identity",
+    "nodes",
+    "citations",
+    "results",
+    "claims",
+    "estimated_tokens",
+    "estimated_cost_usd",
+    "warnings",
+    "generated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "project_id": {
+      "enum": [
+        "quality-anomaly-agent",
+        "contract-review-agent",
+        "enterprise-rag-assistant"
+      ]
+    },
+    "case_id": { "type": "string", "pattern": "^[a-z0-9_]+$", "minLength": 1, "maxLength": 80 },
+    "run_id": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "trace_id": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "status": {
+      "enum": ["created", "running", "awaiting_human", "completed", "failed", "expired", "replay_ready"]
+    },
+    "identity": { "$ref": "#/$defs/identity" },
+    "nodes": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/node" } },
+    "citations": { "type": "array", "maxItems": 200, "items": { "$ref": "#/$defs/citation" } },
+    "results": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/result" } },
+    "claims": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/claim" } },
+    "estimated_tokens": { "type": "integer", "minimum": 0 },
+    "estimated_cost_usd": { "type": "number", "minimum": 0 },
+    "warnings": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "type": "string" }
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "sourceType": {
+      "enum": [
+        "historical_project_fact",
+        "public_reconstruction",
+        "simulated_run_result",
+        "simulated_extension"
+      ]
+    },
+    "sourceFields": {
+      "type": "object",
+      "properties": {
+        "source_type": { "$ref": "#/$defs/sourceType" },
+        "fact_id": { "type": ["string", "null"], "pattern": "^[A-Z]{2}-F[0-9]{3}$" },
+        "claim_id": { "type": ["string", "null"], "pattern": "^[A-Z]{2}-C[0-9]{3}$" }
+      },
+      "required": ["source_type", "fact_id", "claim_id"]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workflow_version",
+        "dataset_version",
+        "rules_version",
+        "prompt_or_policy_version",
+        "runtime_version",
+        "model_provider",
+        "seed"
+      ],
+      "properties": {
+        "workflow_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "dataset_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "rules_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "prompt_or_policy_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "runtime_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model_provider": { "const": "mock" },
+        "seed": { "type": "integer" }
+      }
+    },
+    "node": {
+      "allOf": [
+        { "$ref": "#/$defs/sourceFields" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_type", "fact_id", "claim_id", "sequence", "node", "status",
+            "duration_ms", "input_count", "output_count", "warning_codes"
+          ],
+          "properties": {
+            "source_type": { "$ref": "#/$defs/sourceType" },
+            "fact_id": { "type": ["string", "null"] },
+            "claim_id": { "type": ["string", "null"] },
+            "sequence": { "type": "integer", "minimum": 1 },
+            "node": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "status": { "enum": ["completed", "failed", "skipped"] },
+            "duration_ms": { "type": "integer", "minimum": 0 },
+            "input_count": { "type": "integer", "minimum": 0 },
+            "output_count": { "type": "integer", "minimum": 0 },
+            "warning_codes": { "type": "array", "maxItems": 20, "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "citation": {
+      "allOf": [
+        { "$ref": "#/$defs/sourceFields" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_type", "fact_id", "claim_id", "citation_id", "public_summary"],
+          "properties": {
+            "source_type": { "$ref": "#/$defs/sourceType" },
+            "fact_id": { "type": ["string", "null"] },
+            "claim_id": { "type": ["string", "null"] },
+            "citation_id": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "public_summary": { "type": "string", "minLength": 1, "maxLength": 500 }
+          }
+        }
+      ]
+    },
+    "result": {
+      "allOf": [
+        { "$ref": "#/$defs/sourceFields" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source_type", "fact_id", "claim_id", "result_id", "result_type", "summary", "citation_ids"
+          ],
+          "properties": {
+            "source_type": { "$ref": "#/$defs/sourceType" },
+            "fact_id": { "type": ["string", "null"] },
+            "claim_id": { "type": ["string", "null"] },
+            "result_id": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "result_type": { "enum": ["finding", "answer", "clarification", "refusal", "human_gate"] },
+            "summary": { "type": "string", "minLength": 1, "maxLength": 1000 },
+            "citation_ids": { "type": "array", "maxItems": 50, "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "claim": {
+      "allOf": [
+        { "$ref": "#/$defs/sourceFields" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_type", "fact_id", "claim_id", "statement"],
+          "properties": {
+            "source_type": { "$ref": "#/$defs/sourceType" },
+            "fact_id": { "type": ["string", "null"] },
+            "claim_id": { "type": ["string", "null"] },
+            "statement": { "type": "string", "minLength": 1, "maxLength": 500 }
+          }
+        }
+      ]
+    }
+  }
+}

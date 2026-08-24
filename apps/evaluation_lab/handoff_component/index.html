@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <script>
+      const send = (type, data = {}) => window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, '*')
+      send('streamlit:componentReady', { apiVersion: 1 })
+      send('streamlit:setFrameHeight', { height: 0 })
+      const hash = window.parent.location.hash.replace(/^#/, '')
+      const params = new URLSearchParams(hash)
+      const handoffId = params.get('handoff_id')
+      const redeemToken = params.get('redeem_token')
+      if (handoffId && redeemToken) {
+        window.parent.history.replaceState(null, '', window.parent.location.pathname + window.parent.location.search)
+        send('streamlit:setComponentValue', { value: { handoff_id: handoffId, redeem_token: redeemToken }, dataType: 'json' })
+      } else {
+        send('streamlit:setComponentValue', { value: null, dataType: 'json' })
+      }
+    </script>
+  </body>
+</html>

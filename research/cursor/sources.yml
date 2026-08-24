@@ -1,0 +1,55 @@
+schema_version: 1
+product: Cursor
+vendor: Anysphere
+official_domains: [cursor.com]
+researched_at: "2026-08-23"
+applicable_version: "Cursor 官方文档，访问于 2026-08-23"
+sources:
+  - id: CURSOR-01
+    title: Cursor documentation
+    url: https://cursor.com/docs
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "产品范围、工作流与集成"
+    license_note: "仅作事实引用；未复制图片或长段原文。"
+  - id: CURSOR-02
+    title: Cursor Agent overview
+    url: https://cursor.com/docs/agent/overview
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Agent 的 instructions、tools 与 model 组成"
+    license_note: "仅作事实引用。"
+  - id: CURSOR-03
+    title: Rules
+    url: https://cursor.com/docs/context/rules-for-ai
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Project Rules、User Rules、AGENTS.md 与上下文注入"
+    license_note: "仅作事实引用。"
+  - id: CURSOR-04
+    title: Background Agents
+    url: https://cursor.com/docs/background-agent
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "远程环境、GitHub 分支、后台执行与安全边界"
+    license_note: "仅作事实引用。"
+  - id: CURSOR-05
+    title: Run Modes
+    url: https://cursor.com/docs/agent/security/run-modes
+    accessed_at: "2026-08-23"
+    applicable_version: "Cursor 3.6 文档"
+    source_kind: documentation
+    claim_scope: "Auto-review、Allowlist、Run Everything 与沙箱"
+    license_note: "仅作事实引用。"
+  - id: CURSOR-06
+    title: Cloud Agent security overview
+    url: https://cursor.com/docs/cloud-agent/security
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "隔离 VM、数据保留、网络外发与 Prompt Injection 风险"
+    license_note: "仅作事实引用。"

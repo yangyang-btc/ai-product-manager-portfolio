@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "nda_001",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-201",
+    "contract_type": "nda",
+    "version": "V0.8",
+    "party_aliases": ["EQUIPMENT-COMPANY-DEMO", "PARTNER-C"],
+    "business_context": {
+      "project_alias": "PROJECT-DEMO-201",
+      "collaboration_scope": "equipment_solution_evaluation"
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-NDA-SCOPE-001",
+        "heading": "保密信息",
+        "page": 2,
+        "text": "保密信息包括设备方案、机械图纸、BOM 与工艺参数，但未列明软件代码和客户数据。"
+      },
+      {
+        "clause_id": "CL-NDA-DISC-001",
+        "heading": "允许披露",
+        "page": 4,
+        "text": "接收方可向其关联方披露保密信息，未约定必要性、顾问范围及同等保密义务。"
+      },
+      {
+        "clause_id": "CL-NDA-TERM-001",
+        "heading": "保密期限",
+        "page": 5,
+        "text": "保密义务自披露日起五年，商业秘密依法持续保护。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-NDA-011",
+      "version": "V4.0",
+      "severity": "high",
+      "requirement": "技术合作 NDA 应覆盖软件代码、客户数据，并限定允许披露范围及同等保密义务。"
+    }
+  ],
+  "expected": {
+    "findings": [
+      {
+        "finding_id": "RF-NDA-001",
+        "severity": "high",
+        "source": "llm",
+        "clause_ids": ["CL-NDA-SCOPE-001", "CL-NDA-DISC-001"],
+        "rule_id": "RULE-NDA-011",
+        "rationale": "保护对象与允许披露边界不完整。",
+        "human_required": true
+      }
+    ],
+    "non_findings": [
+      {
+        "clause_id": "CL-NDA-TERM-001",
+        "reason": "对商业秘密持续保护，不将固定期限单独标为风险。"
+      }
+    ],
+    "forbidden_behavior": ["invent_missing_confidential_information", "bypass_legal_review"]
+  }
+}

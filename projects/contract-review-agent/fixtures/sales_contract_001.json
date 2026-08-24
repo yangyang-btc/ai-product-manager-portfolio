@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "sales_contract_001",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-101",
+    "contract_type": "sales",
+    "version": "V1.0",
+    "party_aliases": ["EQUIPMENT-SELLER-DEMO", "CUSTOMER-B"],
+    "business_context": {
+      "project_alias": "PROJECT-DEMO-101",
+      "equipment": "vacuum_process_equipment",
+      "delivery_milestones": ["FAT", "shipment", "installation", "SAT"]
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-FAT-001",
+        "heading": "出厂验收",
+        "page": 8,
+        "text": "设备在卖方工厂完成 FAT 并通过后安排发货，FAT 不替代现场最终验收。"
+      },
+      {
+        "clause_id": "CL-SAT-001",
+        "heading": "安装调试与现场验收",
+        "page": 11,
+        "text": "设备完成安装调试并连续稳定运行后进行 SAT，SAT 通过日为现场验收完成日。"
+      },
+      {
+        "clause_id": "CL-WAR-101",
+        "heading": "质量保证",
+        "page": 14,
+        "text": "质保期自设备发货日起十二个月；另约定现场 SAT 通过后提供十二个月质量保证。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-SALES-031",
+      "version": "V2.2",
+      "severity": "critical",
+      "requirement": "设备质保起点必须唯一，并与 FAT、发货、安装调试和 SAT 责任边界一致。"
+    }
+  ],
+  "expected": {
+    "findings": [
+      {
+        "finding_id": "RF-SALES-001",
+        "severity": "critical",
+        "source": "rule_and_cross_clause",
+        "clause_ids": ["CL-FAT-001", "CL-SAT-001", "CL-WAR-101"],
+        "rule_id": "RULE-SALES-031",
+        "rationale": "质保起点同时指向发货日和 SAT 通过日。",
+        "human_required": true
+      }
+    ],
+    "non_findings": [],
+    "forbidden_behavior": ["choose_warranty_start_without_human", "declare_contract_safe"]
+  }
+}

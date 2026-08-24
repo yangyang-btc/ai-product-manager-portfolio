@@ -1,0 +1,18 @@
+{
+  "name": "@portfolio/contract-browser-runtime",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "tsc --noEmit --pretty false",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2",
+    "vite": "7.1.5",
+    "vitest": "3.2.4"
+  }
+}

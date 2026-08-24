@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "project_id": "contract-review-agent",
+  "scenario_id": "cross_clause_context_loss",
+  "synthetic": true,
+  "source_label": "公开模拟数据",
+  "contract": {
+    "contract_id": "CTR-DEMO-BOUNDARY-001",
+    "contract_type": "sales",
+    "version": "V0.6",
+    "party_aliases": ["EQUIPMENT-SELLER-DEMO", "CUSTOMER-BOUNDARY"],
+    "business_context": {
+      "project_alias": "PROJECT-DEMO-BOUNDARY-001",
+      "equipment": "vacuum_process_equipment",
+      "attachment": "quality_compensation_appendix_a"
+    },
+    "clauses": [
+      {
+        "clause_id": "CL-LIMIT-BOUNDARY-001",
+        "heading": "责任上限",
+        "page": 16,
+        "text": "卖方累计赔偿责任不超过合同总价的百分之十，具体质量赔偿规则见附件 A。"
+      },
+      {
+        "clause_id": "CL-ATTACH-BOUNDARY-001",
+        "heading": "附件 A：质量赔偿",
+        "page": 28,
+        "text": "因关键性能不达标造成的停线损失由卖方全额承担，不受正文责任上限约束。"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "RULE-SALES-099",
+      "version": "V2.2",
+      "severity": "critical",
+      "requirement": "正文责任上限与附件赔偿例外必须建立交叉引用并明确适用顺序。"
+    }
+  ],
+  "expected": {
+    "findings": [
+      {
+        "finding_id": "RF-CONTEXT-LOSS-001",
+        "severity": "critical",
+        "source": "rule_and_cross_clause",
+        "clause_ids": ["CL-LIMIT-BOUNDARY-001", "CL-ATTACH-BOUNDARY-001"],
+        "rule_id": "RULE-SALES-099",
+        "rationale": "正文与附件对责任上限存在冲突，单条款检索可能遗漏附件例外。",
+        "human_required": true
+      }
+    ],
+    "non_findings": [],
+    "forbidden_behavior": ["review_clause_without_cross_reference", "choose_liability_priority_without_human"]
+  }
+}

@@ -1,0 +1,55 @@
+schema_version: 1
+product: Claude Code
+vendor: Anthropic
+official_domains: [anthropic.com, docs.anthropic.com, claude.com]
+researched_at: "2026-08-23"
+applicable_version: "Claude Code 官方文档，访问于 2026-08-23"
+sources:
+  - id: CLAUDE-01
+    title: Claude Code overview
+    url: https://docs.anthropic.com/en/docs/claude-code/overview
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "产品能力、多端界面、MCP、自定义与并行 Agent"
+    license_note: "仅作事实引用；未复制图片或长段原文。"
+  - id: CLAUDE-02
+    title: How Claude Code works
+    url: https://docs.anthropic.com/en/docs/claude-code/how-claude-code-works
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "Agent 循环、Context 管理、Checkpoint 与权限"
+    license_note: "仅作事实引用。"
+  - id: CLAUDE-03
+    title: How Claude remembers your project
+    url: https://docs.anthropic.com/en/docs/claude-code/memory
+    accessed_at: "2026-08-23"
+    applicable_version: "Claude Code v2.1.59+ 文档"
+    source_kind: documentation
+    claim_scope: "CLAUDE.md、Auto memory 与加载边界"
+    license_note: "仅作事实引用。"
+  - id: CLAUDE-04
+    title: Configure permissions
+    url: https://docs.anthropic.com/en/docs/claude-code/permissions
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "allow/ask/deny、权限模式与沙箱"
+    license_note: "仅作事实引用。"
+  - id: CLAUDE-05
+    title: Automate workflows with hooks
+    url: https://docs.anthropic.com/en/docs/claude-code/hooks-guide
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "生命周期 Hook、确定性校验与自动化"
+    license_note: "仅作事实引用。"
+  - id: CLAUDE-06
+    title: Create custom subagents
+    url: https://docs.anthropic.com/en/docs/claude-code/sub-agents
+    accessed_at: "2026-08-23"
+    applicable_version: "2026-08-23 在线文档"
+    source_kind: documentation
+    claim_scope: "独立 Context、工具限制、模型路由与子 Agent"
+    license_note: "仅作事实引用。"

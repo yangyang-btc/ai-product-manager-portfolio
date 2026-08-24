@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "projects/*/browser"
+allowBuilds:
+  esbuild: true
+  msw: true

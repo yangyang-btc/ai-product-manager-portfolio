@@ -1,0 +1,76 @@
+schema_version: 1
+project_id: contract-review-agent
+scenarios:
+  - id: procurement_contract_001
+    contract_type: procurement
+    summary: 核心零部件采购合同中，付款节点早于来料验收，且质量异议期短于检验周期。
+    required_objects: [contract, purchase_order, delivery_plan, inspection_standard, clauses, rules]
+    expected_route: [classify, structural_split, completeness, rules, rag, semantic_review, cross_clause, human]
+    expected_findings: [payment_before_acceptance, objection_window_mismatch]
+    counterexample_required: true
+    human_boundary: 采购与法务确认风险接受和修订版本。
+    tags: [cross_clause, critical]
+  - id: sales_contract_001
+    contract_type: sales
+    summary: 设备销售合同将质保起点同时表述为发货日和 SAT 通过日。
+    required_objects: [contract, fat_plan, sat_plan, delivery_milestones, warranty_clause]
+    expected_route: [classify, structural_split, rules, rag, cross_clause, human]
+    expected_findings: [warranty_start_conflict, acceptance_dependency]
+    counterexample_required: true
+    human_boundary: 商务与法务冻结质保起点。
+    tags: [fat_sat, conflict]
+  - id: nda_001
+    contract_type: nda
+    summary: NDA 覆盖图纸和 BOM，但对软件代码、客户数据与允许披露对象表述不完整。
+    required_objects: [contract, confidential_information_definition, permitted_disclosure, retention_clause]
+    expected_route: [classify, structural_split, required_clause_rules, rag, semantic_review, human]
+    expected_findings: [scope_gap, disclosure_gap]
+    counterexample_required: true
+    human_boundary: 法务确认保密范围与例外。
+    tags: [definition, missing_clause]
+  - id: technical_cooperation_001
+    contract_type: technical_cooperation
+    summary: 联合开发协议对背景知识产权有定义，但新生成算法与工艺成果的归属不明。
+    required_objects: [contract, background_ip, foreground_ip, deliverables, acceptance_criteria]
+    expected_route: [classify, structural_split, required_clause_rules, rag, cross_clause, human]
+    expected_findings: [foreground_ip_ambiguity, acceptance_gap]
+    counterexample_required: true
+    human_boundary: 研发、项目和法务联合确认。
+    tags: [ip, multi_department]
+  - id: procurement_safe_001
+    contract_type: procurement
+    summary: 付款、验收、质量异议与质保逻辑一致的反例合同。
+    required_objects: [contract, clauses, rules]
+    expected_route: [classify, structural_split, completeness, rules, rag, semantic_review, human]
+    expected_findings: []
+    counterexample_required: false
+    human_boundary: 仍由法务进行最终初审确认。
+    tags: [negative_case]
+  - id: cross_clause_context_loss
+    contract_type: sales
+    summary: 责任上限条款与质量赔偿附件分离，单条检索时容易漏检。
+    required_objects: [contract, clause, attachment, cross_references]
+    expected_route: [classify, structural_split, cross_reference_graph, rules, rag, human]
+    expected_findings: [liability_cap_exception_conflict]
+    counterexample_required: false
+    human_boundary: 法务确认跨条款适用顺序。
+    tags: [bad_case, context_loss]
+  - id: low_ocr_confidence
+    contract_type: procurement
+    summary: 模拟附件关键验收表格解析置信度不足。
+    required_objects: [contract, attachment, parse_quality]
+    expected_route: [parse, completeness, stop_for_human]
+    expected_findings: [unreviewed_region]
+    counterexample_required: false
+    human_boundary: 用户重新上传或人工核对附件。
+    tags: [parsing, manual_required]
+  - id: outdated_rule_version
+    contract_type: nda
+    summary: 检索返回的历史模板已失效，当前规则版本更新。
+    required_objects: [contract, policy_documents, rule_versions]
+    expected_route: [classify, rules, rag, version_check, human]
+    expected_findings: [stale_reference_rejected]
+    counterexample_required: false
+    human_boundary: 法务确认当前有效模板。
+    tags: [version, safety]
+
