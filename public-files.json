@@ -30,12 +30,16 @@
       "sha256": "9ea280e4c89d3f302c1e8b3e5e7db91c46bec0fe761356ae90f32aaf0dbe0e8b"
     },
     {
+      "path": ".streamlit/config.toml",
+      "sha256": "a61be00b0f1ad07be76737c835a653d3526a394fb9fd2b554b43cfd0c2a71e7c"
+    },
+    {
       "path": "Makefile",
       "sha256": "7c3d9f33956dce3734bdda6f784cd4c5f054719accc76798365559394fe7c660"
     },
     {
       "path": "README.md",
-      "sha256": "a7c0270a82cdd6e3242e2a34cfcab48cdbe371faac69dd20857daa36243088e5"
+      "sha256": "a708411b53adb695e0ec6442ebad333d341445243097d170d8f43c71588dc960"
     },
     {
       "path": "apps/README.md",
@@ -694,6 +698,14 @@
       "sha256": "4dcb5aed328e2dc07e6c09c901746d15dd132ea0e498a96b48b4241cd344f1d5"
     },
     {
+      "path": "render.yaml",
+      "sha256": "e9b4ca6b16bf4eae536e8a1c86f46a2b98352271aa9eb4bde3261fba87ea2896"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "d7b3492fa20bae89836ec4a8ee1e7727747460ac18ae107ebd8d9c82f2e4ac60"
+    },
+    {
       "path": "research/README.md",
       "sha256": "61176b59ad71acb9645dd157e89c4f8e594cfb35d34003f1d1bface76becc9a8"
     },
@@ -748,6 +760,10 @@
     {
       "path": "tests/test_contract_review_agent.py",
       "sha256": "f50db521b3bc9fb915fc215521dcb16380730e8622006592a81254af27b3efae"
+    },
+    {
+      "path": "tests/test_deployment_configs.py",
+      "sha256": "fefd19ae839283147ec991f0ac82a62386a7bb77a3b99e996efbb8325b232ebf"
     },
     {
       "path": "tests/test_enterprise_rag_assistant.py",

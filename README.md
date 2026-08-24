@@ -88,4 +88,11 @@ make verify-research
 BASE_URL=/ai-product-manager-portfolio/ make build-pages
 ```
 
+## 公网部署
+
+- GitHub Pages 承载作品集与三个浏览器操作台。
+- `render.yaml` 以公开离线模拟模式部署质量 Agent FastAPI，并通过 `/health` 检查服务状态。
+- Streamlit Community Cloud 从 `apps/evaluation_lab/app.py` 启动 Evaluation Lab；公开环境为只读模式，不接收访客上传的 Run Bundle。
+- 两个外部服务只使用公开模拟数据，不配置真实模型 Key。
+
 公开案例使用重新生成的模拟数据，不包含前公司身份、真实合同、客户/供应商信息、内部接口或生产代码。在线演示结果仅代表公开数据集上的本次运行，不代表历史生产指标。
