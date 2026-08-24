@@ -1,5 +1,7 @@
 # 杨姣静 · AI 产品经理作品集
 
+[在线浏览完整作品集 →](https://yangyang-btc.github.io/ai-product-manager-portfolio/)
+
 这个仓库展示我在企业 AI 场景中的项目实践、产品方法与可运行作品，重点关注 Agent、RAG、Workflow、评测和人机责任边界。
 
 作品集网站通过 GitHub Pages 发布，首页是个人介绍与项目入口；代码仓库承载可运行 Demo、领域模型、模拟数据、评测规范和自动化测试。
