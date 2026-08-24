@@ -763,7 +763,7 @@
     },
     {
       "path": "tests/test_deployment_configs.py",
-      "sha256": "fefd19ae839283147ec991f0ac82a62386a7bb77a3b99e996efbb8325b232ebf"
+      "sha256": "e3fdfaff058fb228a1796163056339abda13df7da2dc0d9f336247040f93823b"
     },
     {
       "path": "tests/test_enterprise_rag_assistant.py",
